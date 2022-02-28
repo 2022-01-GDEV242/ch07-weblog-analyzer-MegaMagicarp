@@ -1,3 +1,4 @@
+
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -70,7 +71,10 @@ public class LogAnalyzer
     public int numberOfAccesses()
     {
         int total = 0;
-        total = 
+        for(int i : hourCounts)
+        {
+            total += 1;
+        }
         return total;
     }
 }
