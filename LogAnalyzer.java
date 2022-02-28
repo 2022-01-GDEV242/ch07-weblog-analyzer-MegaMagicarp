@@ -1,4 +1,4 @@
-
+import java.util.Arrays;
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -43,7 +43,18 @@ public class LogAnalyzer
             hourCounts[hour]++;
         }
     }
-
+    
+    /**
+     * returns the time the website was accesed most.
+     */
+    public int busiestHour()
+    {
+        int size = hourCounts.length;
+        Arrays.sort(hourCounts);
+        int busiestHour = hourCounts[size - 1];
+        return busiestHour;
+    }
+    
     /**
      * Print the hourly counts.
      * These should have been set with a prior
@@ -65,6 +76,7 @@ public class LogAnalyzer
     {
         reader.printData();
     }
+    
     /**
     * Return the number of accesses recorded in the log file.
     */
