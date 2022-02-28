@@ -64,4 +64,13 @@ public class LogAnalyzer
     {
         reader.printData();
     }
+    /**
+    * Return the number of accesses recorded in the log file.
+    */
+    public int numberOfAccesses()
+    {
+        int total = 0;
+        total = 
+        return total;
+    }
 }
