@@ -55,6 +55,14 @@ public class LogAnalyzer
         return busiestHour;
     }
     
+    public int quietestHour()
+    {
+        int quietestHour;
+        Arrays.sort(hourCounts);
+        quietestHour = hourCounts[0];
+        return quietestHour;
+    }
+    
     /**
      * Print the hourly counts.
      * These should have been set with a prior
