@@ -200,6 +200,25 @@ public class LogAnalyzer
     }
     
     /**
+     * Returns the busiest month out of the year.
+     * returns -1 if something went wrong.
+     */
+    public int busiestMonth()
+    {
+        int monthlyAcceses = -1000;
+        int busyMonth = -1; 
+        for(int i = 0; i < monthCounts.length; i++)
+        {
+            if (monthCounts[i] > monthlyAcceses)
+            {
+                monthlyAcceses = monthCounts[i];
+                busyMonth = i;
+            }
+        }
+        return busyMonth;
+    }
+    
+    /**
      * Print the hourly counts.
      * These should have been set with a prior
      * call to analyzeHourlyData.
