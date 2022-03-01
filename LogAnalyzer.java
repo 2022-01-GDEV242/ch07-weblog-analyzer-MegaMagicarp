@@ -167,6 +167,25 @@ public class LogAnalyzer
      */
     public int quietestDay()
     {
+        int dailyAcceses = Integer.MAX_VALUE;
+        int quietDay = -1; 
+        for(int i = 0; i < dayCounts.length; i++)
+        {
+            if (dayCounts[i] < dailyAcceses)
+            {
+                dailyAcceses = dayCounts[i];
+                quietDay = i;
+            }
+        }
+        return quietDay;
+    }
+    
+    /**
+     * Returns the busiest day out of the month.
+     * returns -1 if something went wrong.
+     */
+    public int busiestDay()
+    {
         int dailyAcceses = -1000;
         int busyDay = -1; 
         for(int i = 0; i < dayCounts.length; i++)
