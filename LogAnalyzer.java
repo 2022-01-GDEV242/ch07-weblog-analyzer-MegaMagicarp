@@ -162,7 +162,7 @@ public class LogAnalyzer
     }
     
     /**
-     * Returns the busiest day out of the month.
+     * Returns the quietest day out of the month.
      * returns -1 if something went wrong.
      */
     public int quietestDay()
@@ -216,6 +216,25 @@ public class LogAnalyzer
             }
         }
         return busyMonth;
+    }
+    
+    /**
+     * Returns the quietest month out of the year.
+     * returns -1 if something went wrong.
+     */
+    public int quietestMonth()
+    {
+        int monthlyAcceses = Integer.MAX_VALUE;
+        int quietMonth = -1; 
+        for(int i = 0; i < dayCounts.length; i++)
+        {
+            if (monthCounts[i] < monthlyAcceses)
+            {
+                monthlyAcceses = monthCounts[i];
+                quietMonth = i;
+            }
+        }
+        return quietMonth;
     }
     
     /**
