@@ -9,6 +9,8 @@ public class LogAnalyzer
 {
     // Where to calculate the hourly access counts.
     private int[] hourCounts;
+    private int[] dayCounts;
+    private int[] monthCounts;
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
 
@@ -20,6 +22,8 @@ public class LogAnalyzer
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
+        dayCounts = new int[28];
+        monthCounts = new int [12];
         // Create the reader to obtain the data.
         reader = new LogfileReader("demo.log");
     }
@@ -36,6 +40,7 @@ public class LogAnalyzer
      */
     public void analyzeHourlyData()
     {
+        reader.reset();
         while(reader.hasNext()) 
         {
             LogEntry entry = reader.next();
@@ -44,23 +49,64 @@ public class LogAnalyzer
         }
     }
     
+    public void analyzeDailyData()
+    {
+        reader.reset();
+        while(reader.hasNext()) 
+        {
+            LogEntry entry = reader.next();
+            int day = entry.getDay();
+            hourCounts[day]++;
+        }
+    }
+    
     /**
      * returns the time the website was accesed most.
+     * returns -1 if something went wrong.
      */
     public int busiestHour()
     {
-        int size = hourCounts.length;
-        Arrays.sort(hourCounts);
-        int busiestHour = hourCounts[size - 1];
-        return busiestHour;
+        int hourlyAcceses = -1000;
+        int busyHour = -1; 
+        for(int i = 0; i < hourCounts.length; i++)
+        {
+            if (hourCounts[i] > hourlyAcceses)
+            {
+                hourlyAcceses = hourCounts[i];
+                busyHour = i;
+            }
+        }
+        return busyHour;
+    }
+    
+    public int busiestTwoHours()
+    {
+        int twoHourAcceses = -1000;
+        int busyHours = -1; 
+        for(int i = 0; i < hourCounts.length; i++)
+        {
+            if (hourCounts[i] + hourCounts[i + 1] > twoHourAcceses)
+            {
+                twoHourAcceses = hourCounts[i] + hourCounts[i + 1];
+                busyHours = i;
+            }
+        }
+        return busyHours;
     }
     
     public int quietestHour()
     {
-        int quietestHour;
-        Arrays.sort(hourCounts);
-        quietestHour = hourCounts[0];
-        return quietestHour;
+        int hourlyAcceses = Integer.MAX_VALUE;
+        int quietHour = -1;
+        for(int i = 0; i < hourCounts.length; i++)
+        {
+            if (hourCounts[i] < hourlyAcceses)
+            {
+                hourlyAcceses = hourCounts[i];
+                quietHour = i;
+            }
+        }
+        return quietHour;
     }
     
     /**
@@ -93,7 +139,7 @@ public class LogAnalyzer
         int total = 0;
         for(int i : hourCounts)
         {
-            total += 1;
+            total += i;
         }
         return total;
     }

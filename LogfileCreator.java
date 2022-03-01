@@ -32,11 +32,13 @@ public class LogfileCreator
         if(numEntries > 0) {
             try (FileWriter writer = new FileWriter(filename)) {
                 LogEntry[] entries = new LogEntry[numEntries];
-                for(int i = 0; i < numEntries; i++) {
+                for(int i = 0; i < numEntries; i++) 
+                {
                     entries[i] = createEntry();
                 }
                 Arrays.sort(entries);
-                for(int i = 0; i < numEntries; i++) {
+                for(int i = 0; i < numEntries; i++) 
+                {
                     writer.write(entries[i].toString());
                     writer.write('\n');
                 }
@@ -57,7 +59,7 @@ public class LogfileCreator
      */
     public LogEntry createEntry()
     {
-        int year = 2016;
+        int year = 2015 + rand.nextInt(5);
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
         int day = 1 + rand.nextInt(28);
