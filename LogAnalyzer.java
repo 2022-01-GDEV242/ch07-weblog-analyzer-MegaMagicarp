@@ -49,6 +49,9 @@ public class LogAnalyzer
         }
     }
     
+    /**
+     * Analyze the daily access data from the log file.
+     */
     public void analyzeDailyData()
     {
         reader.reset();
@@ -57,6 +60,34 @@ public class LogAnalyzer
             LogEntry entry = reader.next();
             int day = entry.getDay();
             hourCounts[day]++;
+        }
+    }
+    
+    /**
+     * Analyze the monthly access data from the log file.
+     */
+    public void analizeMonthlyData()
+    {
+        reader.reset();
+        while(reader.hasNext()) 
+        {
+            LogEntry entry = reader.next();
+            int month = entry.getMonth();
+            hourCounts[month]++;
+        }
+    }
+    
+    /**
+     * Analyze the yearly access data from the log file.
+     */
+    public void analizeYearlyData()
+    {
+        reader.reset();
+        while(reader.hasNext()) 
+        {
+            LogEntry entry = reader.next();
+            int year = entry.getYear();
+            hourCounts[year]++;
         }
     }
     
@@ -79,6 +110,10 @@ public class LogAnalyzer
         return busyHour;
     }
     
+    /**
+     * returns the time the website was accesed most over the corse of two hours.
+     * returns -1 if something went wrong.
+     */
     public int busiestTwoHours()
     {
         int twoHourAcceses = -1000;
@@ -94,6 +129,10 @@ public class LogAnalyzer
         return busyHours;
     }
     
+    /**
+     * returns the time the website was accesed least.
+     * returns -1 if something went wrong.
+     */
     public int quietestHour()
     {
         int hourlyAcceses = Integer.MAX_VALUE;
