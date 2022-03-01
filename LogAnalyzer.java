@@ -151,7 +151,7 @@ public class LogAnalyzer
     /**
      * returns the number of acceses stored in the log file.
      */
-    public int monthlyAcceses()
+    public int totalAccessesPerMonth()
     {
         int total = 0;
         for(int i : dayCounts)
@@ -161,7 +161,24 @@ public class LogAnalyzer
         return total;
     }
     
-    
+    /**
+     * Returns the busiest day out of the month.
+     * returns -1 if something went wrong.
+     */
+    public int quietestDay()
+    {
+        int dailyAcceses = -1000;
+        int busyDay = -1; 
+        for(int i = 0; i < dayCounts.length; i++)
+        {
+            if (dayCounts[i] > dailyAcceses)
+            {
+                dailyAcceses = dayCounts[i];
+                busyDay = i;
+            }
+        }
+        return busyDay;
+    }
     
     /**
      * Print the hourly counts.
