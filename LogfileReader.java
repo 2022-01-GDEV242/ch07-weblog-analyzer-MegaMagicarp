@@ -51,15 +51,18 @@ public class LogfileReader implements Iterator<LogEntry>
         
         // Attempt to read the complete set of data from file.
         boolean dataRead;
-        try{
+        try
+        {
             // Locate the file with respect to the current environment.
             URL fileURL = getClass().getClassLoader().getResource(filename);
-            if(fileURL == null) {
+            if(fileURL == null) 
+            {
                 throw new FileNotFoundException(filename);
             }
             Scanner logfile = new Scanner(new File(fileURL.toURI()));
             // Read the data lines until the end of file.
-            while(logfile.hasNextLine()) {
+            while(logfile.hasNextLine()) 
+            {
                 String logline = logfile.nextLine();
                 // Break up the line and add it to the list of entries.
                 LogEntry entry = new LogEntry(logline);
@@ -68,12 +71,14 @@ public class LogfileReader implements Iterator<LogEntry>
             logfile.close();
             dataRead = true;
         }
-        catch(FileNotFoundException | URISyntaxException e) {
+        catch(FileNotFoundException | URISyntaxException e) 
+        {
             System.out.println("Problem encountered: " + e);
             dataRead = false;
         }
         // If we couldn't read the log file, use simulated data.
-        if(!dataRead) {
+        if(!dataRead) 
+        {
             System.out.println("Failed to read the data file: " + filename);
             System.out.println("Using simulated data instead.");
             createSimulatedData(entries);
@@ -138,7 +143,8 @@ public class LogfileReader implements Iterator<LogEntry>
      */    
     public void printData()
     {
-        for(LogEntry entry : entries) {
+        for(LogEntry entry : entries) 
+        {
             System.out.println(entry);
         }
     }
@@ -154,7 +160,8 @@ public class LogfileReader implements Iterator<LogEntry>
         LogfileCreator creator = new LogfileCreator();
         // How many simulated entries we want.
         int numEntries = 100;
-        for(int i = 0; i < numEntries; i++) {
+        for(int i = 0; i < numEntries; i++) 
+        {
             data.add(creator.createEntry());
         }
     }
