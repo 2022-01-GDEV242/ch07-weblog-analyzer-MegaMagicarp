@@ -149,6 +149,21 @@ public class LogAnalyzer
     }
     
     /**
+     * returns the number of acceses stored in the log file.
+     */
+    public int monthlyAcceses()
+    {
+        int total = 0;
+        for(int i : dayCounts)
+        {
+            total += i;
+        }
+        return total;
+    }
+    
+    
+    
+    /**
      * Print the hourly counts.
      * These should have been set with a prior
      * call to analyzeHourlyData.
